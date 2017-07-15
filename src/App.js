@@ -3,20 +3,33 @@ import logo from './logo.svg'
 import './App.css'
 import Input from './components/Input'
 import ListView from './components/ListView'
+import { getData, updateData } from './store'
+import * as api from './api';
 
 class App extends Component {
   constructor() {
     super()
 
     this.state = {
-      list: ['homework', 'play game']
+      list: getData()
     }
   }
+
+  componentDidMount() {
+    api.getMovies().then(movies => {
+      this.setState({
+        list: movies.entries
+      })
+    })
+  }
+  
 
   handleSubmit = text => {
     const newList = this.state.list
 
     newList.push(text)
+
+    updateData(newList);
 
     this.setState({
       list: newList
@@ -31,6 +44,8 @@ class App extends Component {
     const newList = currentList.filter(currentTodo => {
       return currentTodo !== todo
     })
+
+    updateData(newList);
 
     this.setState({
       list: newList
@@ -48,6 +63,8 @@ class App extends Component {
 
       return currentTodo;
     })
+
+    updateData(newList);
 
     this.setState({
       list: newList
