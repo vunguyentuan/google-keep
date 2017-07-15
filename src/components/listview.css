@@ -1,0 +1,9 @@
+.list-view-container {
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+.list-view-container .list-item {
+  padding: 10px;
+  border-bottom: 1px solid #D3D3D3;
+}
